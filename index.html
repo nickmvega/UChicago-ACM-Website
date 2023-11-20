@@ -3,9 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
+    <title>UChicago ACM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        /* Styles for the navigation header */
+        .nav-header {
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif; /* Use the 'Roboto' font */
+        }
+
+        /* Basic styles for the navigation bar */
+        .vertical-navbar {
+            background-color: maroon;
+            height: 100vh;
+            width: 400px; /* Adjust the width to make the navigation bar wider */
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            z-index: 2;
+        }
+
+        /* Styles for the navigation links */
+        .nav-link {
+            color: black;
+            text-decoration: none;
+            margin-bottom: 15px; /* Increase the margin for more space between links */
+            font-size: 18px; /* Adjust the font size as needed */
+            transition: color 0.3s; /* Add transition for a smooth color change */
+        }
+
+        /* Hover effect for the navigation links */
+        .nav-link:hover {
+            color: white; /* Change text color to white on hover */
+        }
+
+        .nav-link.active {
+            color: white;
+            /* Add any additional styling for the active link */
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            color: maroon;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%, -50%);
+            z-index: 2;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        #content-container {
+            margin-top: 80px; /* Adjust the margin-top to create space below the navigation bar */
+            margin-left: 400px; /* Set the margin-left to the width of the navigation bar */
+            width: calc(100% - 400px); /* Adjust the width to fill the remaining space */
+            box-sizing: border-box;
+        }
+
+        .content {
+            padding: 20px;
+            color: black;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Modify the existing styles for the content section */
+        .content-section {
+            display: none; /* Hide all content sections by default */
+        }
+
+        .content-section.active {
+            display: block; /* Show the active content section */
+        }
+
+        section.mission-statement {
+            text-align: left;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            color: maroon;
+            margin-top: 50px;
+        }
+
+        section.mission-statement p {
+            color: black; /* Set the color to black for paragraphs within the mission statement */
+        }
+
+        section.join {
+            text-align: left;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            margin-top: 20px; /* Adjust the margin-top value as needed */
+            margin-left: 0; /* Add this to ensure there's no extra left margin */
+        }
+
+        section.join h2 {
+            color: maroon; /* Adjust the color as needed */
+            font-size: 24px; /* Adjust the font size as needed */
+            margin-bottom: 10px; /* Adjust the margin as needed */
+        }
+
+        section.join p {
+            color: black; /* Adjust the color as needed */
+            font-size: 16px; /* Adjust the font size as needed */
+        }
+
+        section.officers {
+            text-align: left;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            margin-top: 20px;
+        }
+
+        section.officers h2 {
+            color: maroon;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        section.officers p {
+            color: black;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <!-- Navigation -->
+    <nav class="vertical-navbar">
+        <!-- Navigation header with logo -->
+        <div class="nav-header">
+            <img src="your-logo-image-url.png" alt="Logo" class="nav-logo">
+            <h2>UChicago ACM</h2>
+            <p>Association for Computer Machinery</p>
+        </div>
+
+        <!-- Navigation links -->
+        <a href="#home" id="home-link" class="nav-link active" data-target="home">Home</a>
+        <a href="#officers" id="officers-link" class="nav-link" data-target="officers">Officers</a>
+        <a href="#committees" id="committees-link" class="nav-link" data-target="committees">Committees</a>
+        <a href="#sponsors" id="sponsors-link" class="nav-link" data-target="sponsors">Sponsors</a>
+        <a href="#newsletter" id="newsletter-link" class="nav-link" data-target="newsletter">Newsletter</a>
+        <a href="#contact" id="contact-link" class="nav-link" data-target="contact">Contact</a>        
+    </nav>
+
+    <!-- Content sections -->
+    <div id="content-container">
+        <div id="home" class="content-section active">
+            <header>
+                <h1>Welcome to UChicago ACM</h1>
+            </header>
+            <main>
+                <!-- Mission Statement section -->
+                <section class="mission-statement">
+                    <h2>Mission Statement</h2>
+                    <p>ACM Uchicago strives to foster communication and collaboration within the University's computer science community and other technical communities, supporting members' professional growth through opportunities for lifelong learning, career development, and professional networking. We plan on organizing various events, including round-table discussions, guest lectures, gaming nights, and our unique ‘innovate evenings’.</p>
+                </section>
+            </main>
+        </div>
+    
+        <div id="officers" class="content-section">
+            <!-- Officers content goes here -->
+            <section class="officers">
+                <h2>Officers</h2>
+                <p>Information about officers goes here.</p>
+            </section>
+        </div>
+    
+        <div id="committees" class="content-section">
+            <!-- Committees content goes here -->
+        </div>
+        <div id="sponsors" class="content-section">
+            <!-- Sponsors content goes here -->
+        </div>
+        <div id="newsletter" class="content-section">
+            <!-- Newsletter content goes here -->
+        </div>
+        <div id="contact" class="content-section">
+            <!-- Contact content goes here -->
+        </div>
+    </div>
 </body>
 </html>
+
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all the section links
+            var sectionLinks = document.querySelectorAll('.nav-link');
+
+            // Add a click event listener to each section link
+            sectionLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent the default behavior
+
+                    // Remove the 'active' class from all links
+                    sectionLinks.forEach(function (link) {
+                        link.classList.remove('active');
+                    });
+
+                    // Add the 'active' class to the clicked link
+                    link.classList.add('active');
+
+                    // Get the target section ID from the data-target attribute
+                    var targetId = link.getAttribute('data-target');
+
+                    // Hide all content sections
+                    document.querySelectorAll('.content-section').forEach(function (section) {
+                        section.classList.remove('active');
+                    });
+
+                    // Show the active content section
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        });
+</script>
