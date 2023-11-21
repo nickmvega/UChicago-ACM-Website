@@ -121,6 +121,51 @@
             margin-top: 0px;
         }
 
+        .officer {
+            text-align: center;
+        }
+
+        .officer img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+        .officer-image {
+            /* Visually hide the text in the image */
+            font-size: 0;
+            color: transparent;
+        }
+
+        .level-0,
+        .level-1,
+        .level-2 {
+            display: flex;
+            justify-content: center; /* Align officers in the center */
+            margin: 20px;
+        }
+
+        .level-0 .officer,
+        .level-1 .officer,
+        .level-2 .officer {
+            margin: 0 20px; /* Adjust spacing between officers */
+        }
+
+
+        .icon-image {
+            width: 100px; /* Adjust the size as needed */
+            height: 100x; /* Adjust the size as needed */
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .social-icon {
+            text-align: center;
+            margin-top: 30px;
+        }
         
     </style>
 </head>
@@ -139,7 +184,7 @@
         <a href="#committees" id="committees-link" class="nav-link" data-target="committees">committees</a>
         <a href="#sponsors" id="sponsors-link" class="nav-link" data-target="sponsors">sponsors</a>
         <a href="#newsletter" id="newsletter-link" class="nav-link" data-target="newsletter">newsletter</a>
-        <a href="#calendar" id="calendar-link" class="nav-link" data-target="calendar">calendar</a>
+        <a href="#events" id="events-link" class="nav-link" data-target="events">events</a>
         <a href="#contact" id="contact-link" class="nav-link" data-target="contact">contact</a>        
     </nav>
 
@@ -188,9 +233,59 @@ experience required – just a desire to explore, connect, and have fun!</pre>
                 <h1>Meet the ACM Officers!</h1>
             </header>
             <!-- Officers content goes here -->
-            <section class="officers">
-                <p>Information about officers goes here.</p>
-            </section>
+            <div class="level-0">
+                <div class="officer">
+                    <img src="president1.jpg" alt="Co-President 1 class="officer-image">
+                    <p>Co-President</p>
+                    <p>Nicholas Vega</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="president2.jpg" alt="Co-President 2" class="officer-image">
+                    <p>Co-President</p>
+                    <p>Charlie Carvajal</p>
+                </div>
+            </div>
+    
+            <div class="level-1">
+                <div class="officer">
+                    <img src="treasurer.jpg" alt="Treasurer" class="officer-image">
+                    <p>Treasurer</p>
+                    <p>Carlos Carvajal</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="secretary.jpg" alt="Secretary" class="officer-image">
+                    <p>Secretary</p>
+                    <p>[Secretary Name]</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="social-chair.jpg" alt="Social Chair" class="officer-image">
+                    <p>Social Chair</p>
+                    <p>[Social Chair Name]</p>
+                </div>
+            </div>
+    
+            <div class="level-2">
+                <div class="officer">
+                    <img src="ml-director.jpg" alt="ML Director" class="officer-image">
+                    <p>ML Director</p>
+                    <p>[ML Director Name]</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="swe-director.jpg" alt="SWE Director" class="officer-image">
+                    <p>SWE Director</p>
+                    <p>[SWE Director Name]</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="qis-director.jpg" alt="QIS Director" class="officer-image">
+                    <p>QIS Director</p>
+                    <p>[QIS Director Name]</p>
+                </div>
+            </div>
         </div>
     
         <div id="committees" class="content-section">
@@ -201,10 +296,10 @@ experience required – just a desire to explore, connect, and have fun!</pre>
             <section>
                 <h2>Machine Learning Committee</h2>
                 <pre>Current ML Director:</pre>
-                <pre>The ML Committee is devoted to providing students with basic computer science experience and 
-the opportunity to work on machine learning. Following an immersive fall ramp-up workshop, members will 
-work on publishing papers at ML conferences and workshops. Additionally, the ML Committee will work on 
-two quarter-long projects during the Winter and Spring quarters.</pre>
+                <pre>The ML Committee is devoted to providing students with any computer science experience the 
+opportunity to develop machine learning knowledge. Following an immersive Fall quarter ramp-up workshop, 
+members will work on publishing papers at ML conferences and workshops. Additionally, the ML Committee will 
+work on two quarter-long projects during the Winter and Spring quarters.</pre>
             </section>
 
             <section>
@@ -228,11 +323,55 @@ two quarter-long projects during the Winter and Spring quarters.</pre>
                 <h1>Student Newsletter</h1>
             </header>
         </div>
-        <div id="calendar" class="content-section">
+        <div id="events" class="content-section">
             <header>
-                <h1>Calendar</h1>
+                <h1>Upcoming events!</h1>
             </header>
-    
+
+            <section>
+                <h2>UChicago ACM Game Night</h2>
+                <pre>Friday, Janurary 5th, 2024 6:00 pm - 9:00 pm at the MADD Center (Room TBD).
+UChicago ACM is hosting a game night to start off the new quarter!</pre>
+            </section>
+
+            <section>
+                <h2>2024 Chicago Quantum Recruiting Forum</h2>
+                <pre>Friday, April 11th, 2024 12:00 pm - 4:00 pm at the John Crerar Library Building.</pre>
+                <a href="https://bit.ly/2024CQRF." target="_blank" rel="noopener noreferrer">Register through this link</a>
+            </section>
+
+
+        </div>
+        <div id="contact" class="content-section">
+            <header>
+                <h1>Get in touch!</h1>
+            </header>
+
+                <!-- Social media icons -->
+            <div class="social-icons">
+                <div class="social-icon">
+                    <img src="facebook-icon.png" alt="Facebook Icon" class="icon-image">
+                    <p>Facebook</p>
+                </div>
+
+                <div class="social-icon">
+                    <img src="instagram-icon.png" alt="Instagram Icon" class="icon-image">
+                    <p>Instagram</p>
+                </div>
+
+                <div class="social-icon">
+                    <img src="linkedin-icon.png" alt="LinkedIn Icon" class="icon-image">
+                    <p>LinkedIn</p>
+                </div>
+
+            </div>
+
+            <div class="contact-section">
+                <section>
+                    <pre>            Feel free to contact us at uchicagoacm@gmail.com and we will make sure to follow up!</pre>
+                </section>
+            </div>
+
         </div>
     </div>
 </body>
