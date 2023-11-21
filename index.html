@@ -6,11 +6,13 @@
     <title>UChicago ACM</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         /* Styles for the navigation header */
 
         .nav-logo {
-            width: 200px; /* Adjust the width as needed */
+            width: 300px; /* Adjust the width as needed */
             height: auto; /* Maintain the aspect ratio */
         }
 
@@ -18,6 +20,7 @@
             margin-bottom: 5px;
             text-align: center;
             font-family: 'Courier Prime', monospace; /* Use the 'Roboto' font */
+            font-size:11px;
         }
 
         /* Basic styles for the navigation bar */
@@ -68,8 +71,9 @@
             position: absolute;
             top: 50px;
             left: 50%;
-            transform: translateX(-50%, -50%);
+            transform: translateX(-50%);
             z-index: 2;
+            margin-left: 200px;
         }
 
         header h1 {
@@ -143,20 +147,149 @@
             margin-bottom: 10px;
         }
 
+        header h1,
+        #officers h2 {
+            font-size: 24px; /* Adjust the font size as needed */
+            margin: 0;
+        } 
+
         section.officers {
-            text-align: left;
+            display: inline-block; /* Center the content horizontally */
+            text-align: left; /* Align text to the left within the centered container */
             padding: 20px;
             box-sizing: border-box;
             position: relative;
             z-index: 1;
             margin-top: 20px;
+            margin-left: 0px; /* Adjust the left margin as needed */
+            font-family: 'Courier Prime', monospace;
+            width: 70%; /* Adjust the width as needed */
         }
 
-        section.officers h2 {
-            color: maroon;
-            font-size: 24px; /* Adjust the font size as needed */
-            margin-bottom: 10px;
+        section.officers p {
+            color: black;
+            font-size: 16px; /* Adjust the font size as needed */
         }
+
+
+        $white: #fff;
+        $black: #000;
+
+        :root {
+        --red: #990000;
+        --yellow: #e6b800;  
+        }
+
+        .calendar{
+        margin: 50px auto;
+        width: 60%;
+            
+        .calendar-top{
+            background-color: var(--red);
+            padding: 15px 10px;    
+            width: 100%;
+            text-align: center;
+            .icons{        
+                color: $white;       
+                background-color: transparent;
+                border: none;        
+                font-size: 30px;
+                transition: color .3s;
+            }
+            #prev{
+                float: left;
+            }
+            #next{
+                float: right;
+            }
+            .icons:hover{
+                cursor: pointer;
+                color: var(--yellow);
+            }
+            .icons:focus{
+                outline: none;
+            }
+            .top{
+            display: inline-block;      
+            h3{              
+                color: $white;
+                font-size: 35px;        
+            }  
+            }
+        }
+        
+        .calendar-bottom{ 
+            border: 1px solid var(--red);
+            .days-of-week{ 
+            background-color: var(--yellow);
+            p{
+                border-right: 1px solid white;        
+                display: inline-block;
+                width: 14.28%;
+                margin: 0;               
+                color: $white;
+                font-size: 20px;
+                font-weight: 500;
+                text-align: center;        
+            }
+            p:last-child{
+                border-right: none;
+            }
+            }
+
+            .days {
+                font-size: 0px;
+                overflow: hidden; /* Add this line to fix the float issue */
+            }
+
+            .days .one-day {
+                border: 1px solid #ebebeb;
+                display: inline-block;
+                width: calc(14.28% - 2px); /* Adjust the width and consider the border */
+                height: 100px;
+                margin: 0;
+                padding: 0;
+                background-color: $white;
+                position: relative;
+            }
+
+            .days .one-day .number {
+                background-color: $black;
+                color: $white;
+                padding: 2px 10px;
+                height: 30px;
+                font-size: 14px;
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                margin: 0;
+            }
+
+            .days .one-day .today {
+                background-color: var(--red) !important;
+            }
+            
+        }
+        }
+
+        .days-of-week p {
+            width: calc(100% / 7);
+            border-right: 1px solid white;
+            display: inline-block;
+            width: 14.28%;
+            margin: 0;
+            color: $white;
+            font-size: 16px; /* Adjust the font size as needed */
+            font-weight: 500;
+            text-align: center;
+            padding: 10px 0; /* Add padding to center the text vertically */
+        }
+
+        .days-of-week p:last-child {
+            border-right: none;
+        }
+
+
     </style>
 </head>
 <body>
@@ -164,9 +297,8 @@
     <nav class="vertical-navbar">
         <!-- Navigation header with logo -->
         <div class="nav-header">
-            <img src="logo_final.png" alt="Logo" class="nav-logo">
-            <h2>UChicago ACM</h2>
-            <p>Association for Computer Machinery</p>
+            <img src="final_logo.png" alt="Logo" class="nav-logo">
+            <h2>Association for Computer Machinery</h2>
         </div>
 
         <!-- Navigation links -->
@@ -189,13 +321,13 @@
                 <!-- Mission Statement section -->
                 <section class="mission-statement">
                     <h2>Mission Statement</h2>
-                    <p>ACM Uchicago strives to foster communication and collaboration within the University's computer science community and other technical communities, supporting members' professional growth through opportunities for lifelong learning, career development, and professional networking. We plan on organizing various events, including round-table discussions, guest lectures, gaming nights, and our unique ‘innovate evenings’.</p>
+                    <p>UChicago ACM strives to foster communication and collaboration within the University's computer science community and other technical communities, supporting members' professional growth through opportunities for lifelong learning, career development, and professional networking. We plan on organizing various events, including round-table discussions, guest lectures, gaming nights, and our unique ‘innovate evenings’.</p>
                 </section>
 
                 <section class="join">
                     <h2>Why you should join</h2>
                     <pre>
-Join ACM UChicago and become a part of a vibrant community dedicated to fostering communication and 
+Join UChicago ACM and become a part of a vibrant community dedicated to fostering communication and 
 collaboration within the University's computer science community and other technical fields. 
 Our inclusive environment welcomes everyone, regardless of coding experience.
                                                 
@@ -217,24 +349,51 @@ experience required – just a desire to explore, connect, and have fun!
         </div>
     
         <div id="officers" class="content-section">
+            <header>
+                <h1>2023-2024 Officers</h1>
+            </header>
             <!-- Officers content goes here -->
             <section class="officers">
-                <h2>Officers</h2>
                 <p>Information about officers goes here.</p>
             </section>
         </div>
     
         <div id="committees" class="content-section">
-            <!-- Committees content goes here -->
+            <header>
+                <h1>Active Committees</h1>
+            </header>
         </div>
         <div id="sponsors" class="content-section">
-            <!-- Sponsors content goes here -->
+            <header>
+                <h1>Current Sponsors</h1>
+            </header>
         </div>
         <div id="newsletter" class="content-section">
-            <!-- Newsletter content goes here -->
+            <header>
+                <h1>Student Newsletter</h1>
+            </header>
         </div>
-        <div id="contact" class="content-section">
-            <!-- Contact content goes here -->
+        <div id="calendar" class="content-section">
+            <header>
+                <h1>Calendar</h1>
+            </header>
+
+            <div class="calendar">
+                <div class="calendar-top">
+                  <button class="icons" id="prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+                  <div class="top">      
+                    <h3 id="monthYear"></h3>      
+                  </div>
+                  <button class="icons" id="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+                <div class="calendar-bottom">
+                  <div class="days-of-week">
+                    <p>SUN</p><p>MON</p><p>TUE</p><p>WED</p><p>THUR</p><p>FRI</p><p>SAT</p>  
+                  </div>
+                  <div class="days"></div>
+                </div>
+              </div>
+              
         </div>
     </div>
 </body>
@@ -272,4 +431,93 @@ experience required – just a desire to explore, connect, and have fun!
                 });
             });
         });
+
+
+
+        function getTheMonth(num){
+        var month = new Array();
+        month[0] = "January";
+        month[1] = "February";
+        month[2] = "March";
+        month[3] = "April";
+        month[4] = "May";
+        month[5] = "June";
+        month[6] = "July";
+        month[7] = "August";
+        month[8] = "September";
+        month[9] = "October";
+        month[10] = "November";
+        month[11] = "December";
+        
+        return month[num];
+        }
+
+        //Get This Month
+        function daysInMonth(dimMonth,dimYear) {
+            return new Date(dimYear, dimMonth, 0).getDate();
+        }
+        var today = new Date();
+        var dayPosition = today.getDay(); //display the position of day in week mon-sun (0-6)
+        var day = today.getDate(); // display day
+        var monthDay = today.getMonth(); //display month in number
+        var thisMonth = today.getMonth();
+        var month = getTheMonth(monthDay); //display month in word
+        var year = today.getFullYear(); //display year
+        var thisYear = today.getFullYear();
+        $("#monthYear").html(month + ", " + year);
+        displayDays(monthDay,year);
+
+        function displayDays(ddMonth,ddYear){
+        var x = 0;
+        var y = 1;
+        var blanks = 0;  
+        var firstDay = new Date(ddYear,ddMonth,1);  
+        var firstDayPosition = firstDay.getDay();    
+        var lastDay = daysInMonth(ddMonth+1,ddYear); //get last day of month   
+        while (x != (lastDay+blanks)){    
+            if(x >= firstDayPosition){
+            if(y === day && ddMonth == thisMonth && ddYear == thisYear){
+                $("<div class='one-day'><p class='number today'>" + y + "</p></div>").appendTo(".days"); 
+                y++;
+            }
+            else{
+                $("<div class='one-day'><p class='number'>" + y + "</p></div>").appendTo(".days");    
+            y++;
+            }
+            }    
+            else{
+            $("<div class='one-day'></div>").appendTo(".days"); 
+            blanks++;     
+            }
+            x++;
+        }
+        }
+
+        $("#prev").click(function(){
+        if(monthDay == 0){
+            monthDay = 11;
+            year--;
+        }
+        else{
+            monthDay = monthDay-1;
+        }
+        month = getTheMonth(monthDay, year);  
+        $("#monthYear").html(month + ", " + year);
+        $(".days").empty();
+        displayDays(monthDay,year);
+        });
+        $("#next").click(function(){
+        if(monthDay == 11){
+            monthDay = 0;
+            year++;
+        }
+        else{
+            monthDay = monthDay+1;
+        }
+        month = getTheMonth(monthDay);  
+        $("#monthYear").html(month + ", " + year);
+        $(".days").empty();
+        displayDays(monthDay,year);
+        });
+
 </script>
