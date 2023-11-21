@@ -9,6 +9,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
+
+        body {
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50; /* Green color, you can customize */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green color, you can customize */
+        }
         /* Styles for the navigation header */
 
         .nav-logo {
@@ -170,134 +203,117 @@
             color: black;
             font-size: 16px; /* Adjust the font size as needed */
         }
-
-
-        $white: #fff;
-        $black: #000;
-
-        :root {
-        --red: #990000;
-        --yellow: #e6b800;  
-        }
-
-        .calendar{
-        margin: 50px auto;
-        width: 60%;
-            
-        .calendar-top{
-            background-color: var(--red);
-            padding: 15px 10px;    
-            width: 100%;
-            text-align: center;
-            .icons{        
-                color: $white;       
-                background-color: transparent;
-                border: none;        
-                font-size: 30px;
-                transition: color .3s;
-            }
-            #prev{
-                float: left;
-            }
-            #next{
-                float: right;
-            }
-            .icons:hover{
-                cursor: pointer;
-                color: var(--yellow);
-            }
-            .icons:focus{
-                outline: none;
-            }
-            .top{
-            display: inline-block;      
-            h3{              
-                color: $white;
-                font-size: 35px;        
-            }  
-            }
-        }
         
-        .calendar-bottom{ 
-            border: 1px solid var(--red);
-            .days-of-week{ 
-            background-color: var(--yellow);
-            p{
-                border-right: 1px solid white;        
-                display: inline-block;
-                width: 14.28%;
-                margin: 0;               
-                color: $white;
-                font-size: 20px;
-                font-weight: 500;
-                text-align: center;        
-            }
-            p:last-child{
-                border-right: none;
-            }
-            }
-
-            .days {
-                font-size: 0px;
-                overflow: hidden; /* Add this line to fix the float issue */
-            }
-
-            .days .one-day {
-                border: 1px solid #ebebeb;
-                display: inline-block;
-                width: calc(14.28% - 2px); /* Adjust the width and consider the border */
-                height: 100px;
-                margin: 0;
-                padding: 0;
-                background-color: $white;
-                position: relative;
-            }
-
-            .days .one-day .number {
-                background-color: $black;
-                color: $white;
-                padding: 2px 10px;
-                height: 30px;
-                font-size: 14px;
-                position: absolute;
-                top: -1px;
-                left: -1px;
-                margin: 0;
-            }
-
-            .days .one-day .today {
-                background-color: var(--red) !important;
-            }
-            
-        }
-        }
-
-        .days-of-week p {
-            width: calc(100% / 7);
-            border-right: 1px solid white;
-            display: inline-block;
-            width: 14.28%;
-            margin: 0;
-            color: $white;
-            font-size: 16px; /* Adjust the font size as needed */
-            font-weight: 500;
-            text-align: center;
-            padding: 10px 0; /* Add padding to center the text vertically */
-        }
-
-        .days-of-week p:last-child {
-            border-right: none;
-        }
-
-
     </style>
 </head>
 <body>
+    <div id="container"></div>
+    <div id="content">
+        <button onclick="findOutMore()">Find Out More</button>
+    </div>
+
+    <script id="vertexShader" type="x-shader/x-vertex">
+        void main() {
+            gl_Position = vec4( position, 1.0 );
+        }
+    </script>
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        #define TWO_PI 6.2831853072
+        #define PI 3.14159265359
+
+        precision highp float;
+        uniform vec2 resolution;
+        uniform float time;
+
+        void main(void) {
+            vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+            float t = time * 0.05;
+            float lineWidth = 0.002;
+
+            vec3 color = vec3(0.0);
+            for (int j = 0; j < 3; j++) {
+                for (int i = 0; i < 5; i++) {
+                    color[j] += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 5.0 - length(uv) + mod(uv.x + uv.y, 0.2));
+                }
+            }
+            gl_FragColor = vec4(color[0], color[1], color[2], 1.0);
+        }
+    </script>
+
+    <script id="fragmentShader2" type="x-shader/x-fragment">
+        // Your second fragment shader code here...
+    </script>
+
+    <script src="https://threejs.org/build/three.js"></script>
+
+    <script>
+        var container;
+        var camera, scene, renderer;
+        var uniforms;
+
+        init();
+        animate();
+
+        function init() {
+            container = document.getElementById('container');
+
+            camera = new THREE.Camera();
+            camera.position.z = 1;
+
+            scene = new THREE.Scene();
+
+            var geometry = new THREE.PlaneBufferGeometry(2, 2);
+
+            uniforms = {
+                time: { type: "f", value: 1.0 },
+                resolution: { type: "v2", value: new THREE.Vector2() }
+            };
+
+            var material = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: document.getElementById('vertexShader').textContent,
+                fragmentShader: document.getElementById('fragmentShader').textContent
+            });
+
+            var mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            container.appendChild(renderer.domElement);
+
+            onWindowResize();
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize(event) {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            uniforms.resolution.value.x = renderer.domElement.width;
+            uniforms.resolution.value.y = renderer.domElement.height;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render() {
+            uniforms.time.value += 0.05;
+            renderer.render(scene, camera);
+        }
+
+        function findOutMore() {
+            // Add the logic to navigate or display more information
+            alert("Find Out More button clicked!");
+        }
+    </script>
     <!-- Navigation -->
     <nav class="vertical-navbar">
         <!-- Navigation header with logo -->
         <div class="nav-header">
-            <img src="final_logo.png" alt="Logo" class="nav-logo">
+            <img src="logo-final.png" alt="Logo" class="nav-logo">
             <h2>Association for Computer Machinery</h2>
         </div>
 
@@ -350,7 +366,7 @@ experience required – just a desire to explore, connect, and have fun!
     
         <div id="officers" class="content-section">
             <header>
-                <h1>2023-2024 Officers</h1>
+                <h1>Meet the ACM Officers!</h1>
             </header>
             <!-- Officers content goes here -->
             <section class="officers">
@@ -377,23 +393,7 @@ experience required – just a desire to explore, connect, and have fun!
             <header>
                 <h1>Calendar</h1>
             </header>
-
-            <div class="calendar">
-                <div class="calendar-top">
-                  <button class="icons" id="prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-                  <div class="top">      
-                    <h3 id="monthYear"></h3>      
-                  </div>
-                  <button class="icons" id="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-                </div>
-                <div class="calendar-bottom">
-                  <div class="days-of-week">
-                    <p>SUN</p><p>MON</p><p>TUE</p><p>WED</p><p>THUR</p><p>FRI</p><p>SAT</p>  
-                  </div>
-                  <div class="days"></div>
-                </div>
-              </div>
-              
+    
         </div>
     </div>
 </body>
@@ -433,91 +433,6 @@ experience required – just a desire to explore, connect, and have fun!
         });
 
 
-
-        function getTheMonth(num){
-        var month = new Array();
-        month[0] = "January";
-        month[1] = "February";
-        month[2] = "March";
-        month[3] = "April";
-        month[4] = "May";
-        month[5] = "June";
-        month[6] = "July";
-        month[7] = "August";
-        month[8] = "September";
-        month[9] = "October";
-        month[10] = "November";
-        month[11] = "December";
         
-        return month[num];
-        }
-
-        //Get This Month
-        function daysInMonth(dimMonth,dimYear) {
-            return new Date(dimYear, dimMonth, 0).getDate();
-        }
-        var today = new Date();
-        var dayPosition = today.getDay(); //display the position of day in week mon-sun (0-6)
-        var day = today.getDate(); // display day
-        var monthDay = today.getMonth(); //display month in number
-        var thisMonth = today.getMonth();
-        var month = getTheMonth(monthDay); //display month in word
-        var year = today.getFullYear(); //display year
-        var thisYear = today.getFullYear();
-        $("#monthYear").html(month + ", " + year);
-        displayDays(monthDay,year);
-
-        function displayDays(ddMonth,ddYear){
-        var x = 0;
-        var y = 1;
-        var blanks = 0;  
-        var firstDay = new Date(ddYear,ddMonth,1);  
-        var firstDayPosition = firstDay.getDay();    
-        var lastDay = daysInMonth(ddMonth+1,ddYear); //get last day of month   
-        while (x != (lastDay+blanks)){    
-            if(x >= firstDayPosition){
-            if(y === day && ddMonth == thisMonth && ddYear == thisYear){
-                $("<div class='one-day'><p class='number today'>" + y + "</p></div>").appendTo(".days"); 
-                y++;
-            }
-            else{
-                $("<div class='one-day'><p class='number'>" + y + "</p></div>").appendTo(".days");    
-            y++;
-            }
-            }    
-            else{
-            $("<div class='one-day'></div>").appendTo(".days"); 
-            blanks++;     
-            }
-            x++;
-        }
-        }
-
-        $("#prev").click(function(){
-        if(monthDay == 0){
-            monthDay = 11;
-            year--;
-        }
-        else{
-            monthDay = monthDay-1;
-        }
-        month = getTheMonth(monthDay, year);  
-        $("#monthYear").html(month + ", " + year);
-        $(".days").empty();
-        displayDays(monthDay,year);
-        });
-        $("#next").click(function(){
-        if(monthDay == 11){
-            monthDay = 0;
-            year++;
-        }
-        else{
-            monthDay = monthDay+1;
-        }
-        month = getTheMonth(monthDay);  
-        $("#monthYear").html(month + ", " + year);
-        $(".days").empty();
-        displayDays(monthDay,year);
-        });
 
 </script>
