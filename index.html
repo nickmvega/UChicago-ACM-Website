@@ -9,39 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-
-        body {
-            margin: 0;
-            overflow: hidden; /* Hide scrollbars */
-        }
-
-        canvas {
-            display: block;
-        }
-
-        #content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 1;
-        }
-
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #4CAF50; /* Green color, you can customize */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049; /* Darker green color, you can customize */
-        }
         /* Styles for the navigation header */
 
         .nav-logo {
@@ -120,195 +87,44 @@
             box-sizing: border-box;
         }
 
-        .content {
-            padding: 20px;
-            color: black;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
 
         /* Modify the existing styles for the content section */
         .content-section {
             display: none; /* Hide all content sections by default */
+            font-family: 'Courier Prime', monospace;
+            margin-bottom: 0px; /* Adjust the margin-bottom value as needed */
         }
 
         .content-section.active {
             display: block; /* Show the active content section */
         }
 
-        .content-section {
-            font-family: 'Courier Prime', monospace;
-            font-size: 16px;
-        }
-
         /* Shared styles for all sections */
-        .content-section {
-            font-family: 'Courier Prime', monospace;
-            font-size: 16px;
-        }
-
-        /* Styles for specific sections */
-        section.mission-statement {
-            color: black;
-            margin-top: 50px;
+        section {
             text-align: left;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-            z-index: 1;
-        }
-
-        section.mission-statement h2 {
-            color: maroon;
-            font-size: 24px; /* Adjust the font size as needed */
-            margin-bottom: 10px;
-        }
-
-        section.join {
-            text-align: left;
-            padding: 20px;
+            padding: 15px;
             box-sizing: border-box;
             position: relative;
             z-index: 1;
             margin-top: 0px; /* Adjust the margin-top value as needed */
             margin-left: 0;
-        }
-
-        section.join h2 {
-            color: maroon;
-            font-size: 24px; /* Adjust the font size as needed */
-            margin-bottom: 10px;
-        }
-
-        header h1,
-        #officers h2 {
-            font-size: 24px; /* Adjust the font size as needed */
-            margin: 0;
-        } 
-
-        section.officers {
-            display: inline-block; /* Center the content horizontally */
-            text-align: left; /* Align text to the left within the centered container */
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-            z-index: 1;
-            margin-top: 20px;
-            margin-left: 0px; /* Adjust the left margin as needed */
+            line-height: 2;
             font-family: 'Courier Prime', monospace;
-            width: 70%; /* Adjust the width as needed */
-        }
-
-        section.officers p {
-            color: black;
             font-size: 16px; /* Adjust the font size as needed */
         }
+
+        /* Styles for section headers */
+        section h2 {
+            color: maroon;
+            font-size: 22px; /* Adjust the font size as needed */
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
         
     </style>
 </head>
 <body>
-    <div id="container"></div>
-    <div id="content">
-        <button onclick="findOutMore()">Find Out More</button>
-    </div>
-
-    <script id="vertexShader" type="x-shader/x-vertex">
-        void main() {
-            gl_Position = vec4( position, 1.0 );
-        }
-    </script>
-
-    <script id="fragmentShader" type="x-shader/x-fragment">
-        #define TWO_PI 6.2831853072
-        #define PI 3.14159265359
-
-        precision highp float;
-        uniform vec2 resolution;
-        uniform float time;
-
-        void main(void) {
-            vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
-            float t = time * 0.05;
-            float lineWidth = 0.002;
-
-            vec3 color = vec3(0.0);
-            for (int j = 0; j < 3; j++) {
-                for (int i = 0; i < 5; i++) {
-                    color[j] += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 5.0 - length(uv) + mod(uv.x + uv.y, 0.2));
-                }
-            }
-            gl_FragColor = vec4(color[0], color[1], color[2], 1.0);
-        }
-    </script>
-
-    <script id="fragmentShader2" type="x-shader/x-fragment">
-        // Your second fragment shader code here...
-    </script>
-
-    <script src="https://threejs.org/build/three.js"></script>
-
-    <script>
-        var container;
-        var camera, scene, renderer;
-        var uniforms;
-
-        init();
-        animate();
-
-        function init() {
-            container = document.getElementById('container');
-
-            camera = new THREE.Camera();
-            camera.position.z = 1;
-
-            scene = new THREE.Scene();
-
-            var geometry = new THREE.PlaneBufferGeometry(2, 2);
-
-            uniforms = {
-                time: { type: "f", value: 1.0 },
-                resolution: { type: "v2", value: new THREE.Vector2() }
-            };
-
-            var material = new THREE.ShaderMaterial({
-                uniforms: uniforms,
-                vertexShader: document.getElementById('vertexShader').textContent,
-                fragmentShader: document.getElementById('fragmentShader').textContent
-            });
-
-            var mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-
-            renderer = new THREE.WebGLRenderer();
-            renderer.setPixelRatio(window.devicePixelRatio);
-
-            container.appendChild(renderer.domElement);
-
-            onWindowResize();
-            window.addEventListener('resize', onWindowResize, false);
-        }
-
-        function onWindowResize(event) {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            uniforms.resolution.value.x = renderer.domElement.width;
-            uniforms.resolution.value.y = renderer.domElement.height;
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            render();
-        }
-
-        function render() {
-            uniforms.time.value += 0.05;
-            renderer.render(scene, camera);
-        }
-
-        function findOutMore() {
-            // Add the logic to navigate or display more information
-            alert("Find Out More button clicked!");
-        }
-    </script>
     <!-- Navigation -->
     <nav class="vertical-navbar">
         <!-- Navigation header with logo -->
@@ -342,8 +158,7 @@
 
                 <section class="join">
                     <h2>Why you should join</h2>
-                    <pre>
-Join UChicago ACM and become a part of a vibrant community dedicated to fostering communication and 
+                    <pre>Join UChicago ACM and become a part of a vibrant community dedicated to fostering communication and 
 collaboration within the University's computer science community and other technical fields. 
 Our inclusive environment welcomes everyone, regardless of coding experience.
                                                 
@@ -358,8 +173,12 @@ As a member, you'll benefit from:
   nights, and our unique ‘innovate evenings.’
                                                 
 Join us in building a community where passion for technology meets inclusivity and learning. No coding 
-experience required – just a desire to explore, connect, and have fun!
-                    </pre>
+experience required – just a desire to explore, connect, and have fun!</pre>
+                </section>
+
+                <section class="interested">
+                    <h2>Interested in joining?</h2>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfIcc4dbcOkq1G7KfRagsaVDPc1wCTUEjg_5-krKxwlwyaoow/viewform?vc=0&c=0&w=1&flr=0" target="_blank" rel="noopener noreferrer">Sign up through this link</a>
                 </section>
             </main>
         </div>
@@ -378,6 +197,26 @@ experience required – just a desire to explore, connect, and have fun!
             <header>
                 <h1>Active Committees</h1>
             </header>
+
+            <section>
+                <h2>Machine Learning Committee</h2>
+                <pre>Current ML Director:</pre>
+                <pre>The ML Committee is devoted to providing students with basic computer science experience and 
+the opportunity to work on machine learning. Following an immersive fall ramp-up workshop, members will 
+work on publishing papers at ML conferences and workshops. Additionally, the ML Committee will work on 
+two quarter-long projects during the Winter and Spring quarters.</pre>
+            </section>
+
+            <section>
+                <h2>Quantum Information Science Committee</h2>
+                <pre>Current QIS Director:</pre>
+            </section>
+
+            <section>
+                <h2>Software Engineering Committee</h2>
+                <pre>Current SWE Director:</pre>
+                
+            </section>
         </div>
         <div id="sponsors" class="content-section">
             <header>
