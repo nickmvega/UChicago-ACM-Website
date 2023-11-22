@@ -1,70 +1,25 @@
-<!-- landing.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
+    <script src="https://unpkg.com/three@0.155.0/build/three.js"></script>
+    <script src="https://unpkg.com/three@0.155.0/examples/jsm/controls/OrbitControls.js"></script>
     <style>
-        /* The secret sauce that enables gradient rotation. NOTE: does not work in all browsers. https://caniuse.com/?search=%40property */
-        @property --border-angle-1 {
-            syntax: "<angle>";
-            inherits: true;
-            initial-value: 0deg;
-        }
-
-        @property --border-angle-2 {
-            syntax: "<angle>";
-            inherits: true;
-            initial-value: 90deg;
-        }
-
-        @property --border-angle-3 {
-            syntax: "<angle>";
-            inherits: true;
-            initial-value: 180deg;
-        }
-
-        /* sRGB color. */
-        :root {
-            --bright-blue: rgb(0, 100, 255);
-            --bright-green: rgb(0, 255, 0);
-            --bright-red: rgb(255, 0, 0);
-            --background: black;
-            --foreground: white;
-            --border-size: 2px;
-            --border-radius: 0.75em;
-        }
-
-        /* Display-P3 color, when supported. */
-        @supports (color: color(display-p3 1 1 1)) {
-            :root {
-                --bright-blue: color(display-p3 0 0.2 1);
-                --bright-green: color(display-p3 0.4 1 0);
-                --bright-red: color(display-p3 1 0 0);
-            }
-        }
-
-        @keyframes rotateBackground {
-            to { --border-angle-1: 360deg; }
-        }
-
-        @keyframes rotateBackground2 {
-            to { --border-angle-2: -270deg; }
-        }
-
-        @keyframes rotateBackground3 {
-            to { --border-angle-3: 540deg; }
-        }
-
         body {
-            background: var(--background);
-            color: var(--foreground);
-            min-height: 100dvh;
-            display: grid;
-            place-content: center;
+            overflow: hidden;
             margin: 0;
-            font-family: "Courier Prime", monospace; /* Use Courier Prime */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0; /* Set a background color for better visibility */
+        }
+
+        canvas {
+            position: absolute;
+            z-index: -1;
         }
 
         #landing-page {
@@ -72,64 +27,96 @@
         }
 
         button {
-            --border-angle-1: 0deg;
-            --border-angle-2: 90deg;
-            --border-angle-3: 180deg;
-            color: inherit;
-            font-size: calc(0.8rem + 4vmin);
-            font-family: inherit;
-            border: 0;
-            padding: var(--border-size);
-            display: flex;
-            width: max-content;
-            border-radius: var(--border-radius);
-            background-color: transparent;
-            background-image: conic-gradient(
-                    from var(--border-angle-1) at 10% 15%,
-                    transparent,
-                    var(--bright-blue) 10%,
-                    transparent 30%,
-                    transparent
-                ),
-                conic-gradient(
-                    from var(--border-angle-2) at 70% 60%,
-                    transparent,
-                    var(--bright-green) 10%,
-                    transparent 60%,
-                    transparent
-                ),
-                conic-gradient(
-                    from var(--border-angle-3) at 50% 20%,
-                    transparent,
-                    var(--bright-red) 10%,
-                    transparent 50%,
-                    transparent
-                );
-            animation: 
-                rotateBackground 3s linear infinite,
-                rotateBackground2 8s linear infinite,
-                rotateBackground3 13s linear infinite;
-        }
-
-        /* Change this background to transparent to see how the gradient works */
-        button div {
-            background: var(--background); 
-            padding: 1em 1.5em;
-            border-radius: calc(var(--border-radius) - var(--border-size));
-            color: var(--foreground);
-        }
-
-        @font-face {
-            font-family: "Courier Prime";
-            font-weight: normal;
-            src: url("https://fonts.gstatic.com/s/courierprime/v2/u-4n0qyriQwlOrhSvowK_l5-eRROyNXmvmM.woff2") format("woff2");
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: transparent; /* Use rgba to set a transparent background */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier Prime', monospace;
         }
     </style>
 </head>
 <body>
+    <script>
+        console.clear();
+
+        var scene = new THREE.Scene();
+
+        var camera = new THREE.PerspectiveCamera(30, innerWidth / innerHeight);
+        camera.position.set(0, 0, 10);
+        camera.lookAt(scene.position);
+
+        var renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(innerWidth, innerHeight);
+        renderer.setAnimationLoop(animationLoop);
+        document.body.appendChild(renderer.domElement);
+
+        window.addEventListener("resize", (event) => {
+            camera.aspect = innerWidth / innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(innerWidth, innerHeight);
+        });
+
+        const N = 20; // number of vertices in a line
+        const L = 150; // number of lines
+
+        var colors = [],
+            color = new THREE.Color();
+
+        // Maroon color
+        color.setHSL(0.0, 1, 0.5);
+        var maroon = [color.r, color.g, color.b];
+
+        // White color
+        color.setHSL(0.0, 0, 1);
+        var white = [color.r, color.g, color.b];
+
+        for (var i = 0; i < N; i++) {
+            colors.push(maroon[0], maroon[1], maroon[2]);
+        }
+
+        var material = new THREE.LineBasicMaterial({
+            vertexColors: true,
+            blending: THREE.AdditiveBlending,
+        });
+
+        var geometry, line, lines = [];
+        for (var i = 0; i < L; i++) {
+            geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(colors, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            line = new THREE.Line(geometry, material);
+            line.pos = geometry.getAttribute('position');
+            line.rnd = Math.random();
+
+            lines.push(line);
+        }
+        scene.add(...lines);
+
+        function path(buf, t, i, rnd) {
+            t += 10 * rnd;
+
+            var x = (0.1 + 3 * rnd) * Math.sin(t + 13 * rnd) + 2 * rnd * Math.cos(3.2 * t + 3);
+            var y = (3 - 3 * rnd) * Math.cos(t) + 2 * rnd * Math.cos(4.5 * t - 7 * rnd);
+            var z = (3 * rnd ** 2) * Math.sin(2.7 * t - 4 * rnd);
+            buf.setXYZ(i, x, y, z);
+        }
+
+        function animationLoop(t) {
+            for (var line of lines) {
+                for (var i = 0; i < N; i++)
+                    path(line.pos, t / 3000 - i / 50, i, line.rnd);
+
+                line.pos.needsUpdate = true;
+            }
+
+            renderer.render(scene, camera);
+        }
+    </script>
     <div id="landing-page">
         <main>
-
             <button onclick="enterWebsite()">
                 <div>
                     Welcome to UChicago ACM
@@ -137,7 +124,6 @@
             </button>
         </main>
     </div>
-
     <script>
         function enterWebsite() {
             // Set a cookie to indicate that the user has already seen the landing page
