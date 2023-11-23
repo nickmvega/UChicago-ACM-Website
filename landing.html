@@ -3,174 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <script src="https://unpkg.com/three@0.155.0/build/three.js"></script>
-    <script src="https://unpkg.com/three@0.155.0/examples/jsm/controls/OrbitControls.js"></script>
+    <title>UChicago ACM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contact-styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-        body {
-            overflow: hidden;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Styles for the navigation header */
+
+        .nav-logo {
+            width: 300px; /* Adjust the width as needed */
+            height: auto; /* Maintain the aspect ratio */
+        }
+
+        .nav-header {
+            margin-bottom: 5px;
+            text-align: center;
+            font-family: 'Courier Prime', monospace; /* Use the 'Roboto' font */
+            font-size:11px;
+        }
+
+        /* Basic styles for the navigation bar */
+        .vertical-navbar {
+            background-color: maroon;
             height: 100vh;
-            background-color: #f0f0f0; /* Set a background color for better visibility */
+            width: 400px; /* Adjust the width to make the navigation bar wider */
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            z-index: 2;
         }
 
-        canvas {
+        /* Styles for the navigation links */
+        .nav-link {
+            color: black;
+            text-decoration: none;
+            margin-bottom: 10px; /* Increase the margin for more space between links */
+            font-size: 18px; /* Adjust the font size as needed */
+            transition: color 0.3s; /* Add transition for a smooth color change */
+            margin-top: 40px; /* Adjust the margin-top to move the links down */
+            font-family: 'Courier Prime', monospace;
+        }
+
+        /* Hover effect for the navigation links */
+        .nav-link:hover {
+            color: white; /* Change text color to white on hover */
+        }
+
+        .nav-link.active {
+            color: white;
+            /* Add any additional styling for the active link */
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            color: maroon;
+            font-family: 'Courier Prime', monospace;
+            text-align: center;
             position: absolute;
-            z-index: -1;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            margin-left: 200px;
         }
 
-        #landing-page {
+        header h1 {
+            margin: 0;
+        }
+
+        #content-container {
+            margin-top: 80px; /* Adjust the margin-top to create space below the navigation bar */
+            margin-left: 400px; /* Set the margin-left to the width of the navigation bar */
+            width: calc(100% - 400px); /* Adjust the width to fill the remaining space */
+            box-sizing: border-box;
+        }
+
+
+        /* Modify the existing styles for the content section */
+        .content-section {
+            display: none; /* Hide all content sections by default */
+            font-family: 'Courier Prime', monospace;
+            margin-bottom: 0px; /* Adjust the margin-bottom value as needed */
+        }
+
+        .content-section.active {
+            display: block; /* Show the active content section */
+        }
+
+        /* Shared styles for all sections */
+        section {
+            text-align: left;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            margin-top: 0px; /* Adjust the margin-top value as needed */
+            margin-left: 0;
+            line-height: 2;
+            font-family: 'Courier Prime', monospace;
+            font-size: 16px; /* Adjust the font size as needed */
+        }
+
+        /* Styles for section headers */
+        section h2 {
+            color: maroon;
+            font-size: 22px; /* Adjust the font size as needed */
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+        .officer {
             text-align: center;
         }
 
-        @keyframes rainbowText {
-            0% { color: red; }
-            10% { color: orange; }
-            20% { color: yellow; }
-            30% { color: green; }
-            40% { color: blue; }
-            50% { color: indigo; }
-            60% { color: violet; }
-            70% { color: red; }
-            80% { color: orange; }
-            90% { color: yellow; }
-            100% { color: green; }
+        .officer img {
+            width: 150px;
+            height: 150px;
+            border-radius: 30%;
+        }
+        .officer-image {
+            /* Visually hide the text in the image */
+            font-size: 0;
+            color: transparent;
         }
 
-        @keyframes rainbowBorder {
-            0% { border-color: red; }
-            10% { border-color: orange; }
-            20% { border-color: yellow; }
-            30% { border-color: green; }
-            40% { border-color: blue; }
-            50% { border-color: indigo; }
-            60% { border-color: violet; }
-            70% { border-color: red; }
-            80% { border-color: orange; }
-            90% { border-color: yellow; }
-            100% { border-color: green; }
+        .level-0,
+        .level-1,
+        .level-2 {
+            display: flex;
+            justify-content: center; /* Align officers in the center */
+            margin: 20px;
         }
 
-        button {
-            padding: 20px 40px;
-            font-size: 24px;
-            background-color: transparent;
-            color: white;
-            cursor: pointer;
-            font-family: 'Courier Prime', monospace;
-            border: 2px solid;
-            border-radius: 20px; /* Adjust the value to control the level of rounding */
-            animation: rainbowBorder 8s linear infinite; /* Adjust duration as needed */
-            transition: color 0.3s ease; /* Smooth transition for text color */
-        }
-
-        button:hover {
-            border-color: currentColor;
-            color: transparent; /* Make the text color transparent on hover */
-            animation: rainbowText 8s linear infinite; /* Apply rainbow animation to text color on hover */
+        .level-0 .officer,
+        .level-1 .officer,
+        .level-2 .officer {
+            margin: 0 20px; /* Adjust spacing between officers */
         }
 
 
+        .icon-image {
+            width: 100px; /* Adjust the size as needed */
+            height: 100x; /* Adjust the size as needed */
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .social-icon {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
     </style>
 </head>
 <body>
-    <script>
-        console.clear();
+    <!-- Navigation -->
+    <nav class="vertical-navbar">
+        <!-- Navigation header with logo -->
+        <div class="nav-header">
+            <img src="logo-final.png" alt="Logo" class="nav-logo">
+            <h2>Association for Computer Machinery</h2>
+        </div>
 
-        var scene = new THREE.Scene();
+        <!-- Navigation links -->
+        <a href="#home" id="home-link" class="nav-link active" data-target="home">home</a>
+        <a href="#officers" id="officers-link" class="nav-link" data-target="officers">officers</a>
+        <a href="#committees" id="committees-link" class="nav-link" data-target="committees">committees</a>
+        <!-- <a href="#sponsors" id="sponsors-link" class="nav-link" data-target="sponsors">sponsors</a> -->
+        <!-- <a href="#newsletter" id="newsletter-link" class="nav-link" data-target="newsletter">newsletter</a> -->
+        <a href="#events" id="events-link" class="nav-link" data-target="events">events</a>
+        <a href="#contact" id="contact-link" class="nav-link" data-target="contact">contact</a>        
+    </nav>
 
-        var camera = new THREE.PerspectiveCamera(30, innerWidth / innerHeight);
-        camera.position.set(0, 0, 10);
-        camera.lookAt(scene.position);
+    <!-- Content sections -->
+    <div id="content-container">
+        <div id="home" class="content-section active">
+            <header>
+                <h1>About us</h1>
+            </header>
+            <main>
+                <!-- Mission Statement section -->
+                <section class="mission-statement">
+                    <h2>Mission Statement</h2>
+                    <p>UChicago ACM strives to foster communication and collaboration within the University's computer science community and other technical communities, supporting members' professional growth through opportunities for lifelong learning, career development, and professional networking. We plan on organizing various events, including round-table discussions, guest lectures, gaming nights, and our unique ‘innovate evenings’.</p>
+                </section>
 
-        var renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(innerWidth, innerHeight);
-        renderer.setAnimationLoop(animationLoop);
-        document.body.appendChild(renderer.domElement);
+                <section class="join">
+                    <h2>Why you should join</h2>
+                    <pre>Join UChicago ACM and become a part of a vibrant community dedicated to fostering communication and 
+collaboration within the University's computer science community and other technical fields. 
+Our inclusive environment welcomes everyone, regardless of coding experience.
+                                                
+As a member, you'll benefit from:
+                                                
+- Opportunities for Lifelong Learning: Gain valuable insights and expand your knowledge through engaging 
+  activities.
+- Career Development: Avail yourself of resources to support your professional growth and career 
+  aspirations.
+- Professional Networking: Connect with like-minded individuals and industry professionals.
+- Diverse Events: Participate in various events, from round-table discussions to guest lectures, gaming 
+  nights, and our unique ‘innovate evenings.’
+                                                
+Join us in building a community where passion for technology meets inclusivity and learning. No coding 
+experience required – just a desire to explore, connect, and have fun!</pre>
+                </section>
 
-        window.addEventListener("resize", (event) => {
-            camera.aspect = innerWidth / innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(innerWidth, innerHeight);
-        });
-
-        const N = 20; // number of vertices in a line
-        const L = 150; // number of lines
-
-        var colors = [],
-            color = new THREE.Color();
-
-        // Maroon color
-        color.setHSL(0.0, 1, 0.5);
-        var maroon = [color.r, color.g, color.b];
-
-        // White color
-        color.setHSL(0.0, 0, 1);
-        var white = [color.r, color.g, color.b];
-
-        for (var i = 0; i < N; i++) {
-            colors.push(maroon[0], maroon[1], maroon[2]);
-        }
-
-        var material = new THREE.LineBasicMaterial({
-            vertexColors: true,
-            blending: THREE.AdditiveBlending,
-        });
-
-        var geometry, line, lines = [];
-        for (var i = 0; i < L; i++) {
-            geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.Float32BufferAttribute(colors, 3));
-            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
-            line = new THREE.Line(geometry, material);
-            line.pos = geometry.getAttribute('position');
-            line.rnd = Math.random();
-
-            lines.push(line);
-        }
-        scene.add(...lines);
-
-        function path(buf, t, i, rnd) {
-            t += 10 * rnd;
-
-            var x = (0.1 + 3 * rnd) * Math.sin(t + 13 * rnd) + 2 * rnd * Math.cos(3.2 * t + 3);
-            var y = (3 - 3 * rnd) * Math.cos(t) + 2 * rnd * Math.cos(4.5 * t - 7 * rnd);
-            var z = (3 * rnd ** 2) * Math.sin(2.7 * t - 4 * rnd);
-            buf.setXYZ(i, x, y, z);
-        }
-
-        function animationLoop(t) {
-            for (var line of lines) {
-                for (var i = 0; i < N; i++)
-                    path(line.pos, t / 3000 - i / 50, i, line.rnd);
-
-                line.pos.needsUpdate = true;
-            }
-
-            renderer.render(scene, camera);
-        }
-    </script>
-    <div id="landing-page">
-        <main>
-            <button onclick="enterWebsite()">
-                <div>
-                    Welcome to UChicago ACM
+                <section class="interested">
+                    <h2>Interested in joining?</h2>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfIcc4dbcOkq1G7KfRagsaVDPc1wCTUEjg_5-krKxwlwyaoow/viewform?vc=0&c=0&w=1&flr=0" target="_blank" rel="noopener noreferrer">Sign up through this link</a>
+                </section>
+            </main>
+        </div>
+    
+        <div id="officers" class="content-section">
+            <header>
+                <h1>Meet the ACM Officers!</h1>
+            </header>
+            <!-- Officers content goes here -->
+            <div class="level-0">
+                <div class="officer">
+                    <img src="president1.png" alt="Co-President 1 class="officer-image">
+                    <p>Co-President</p>
+                    <p>Nicholas Vega</p>
                 </div>
-            </button>
-        </main>
-    </div>
-    <script>
-        function enterWebsite() {
-            // Set a cookie to indicate that the user has already seen the landing page
-            document.cookie = "landing_page_seen=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    
+                <div class="officer">
+                    <img src="president2.jpg" alt="Co-President 2" class="officer-image">
+                    <p>Co-President</p>
+                    <p>Charlie Carvajal</p>
+                </div>
+            </div>
+    
+            <div class="level-1">
+                <div class="officer">
+                    <img src="treasurer.png" alt="Treasurer" class="officer-image">
+                    <p>Treasurer</p>
+                    <p>Carlos Carvajal</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="secretary.jpg" alt="Secretary" class="officer-image">
+                    <p>Secretary</p>
+                    <p>[Secretary Name]</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="social-chair.jpg" alt="Social Chair" class="officer-image">
+                    <p>Social Chair</p>
+                    <p>[Social Chair Name]</p>
+                </div>
+            </div>
+    
+            <div class="level-2">
+                <div class="officer">
+                    <img src="ml-director.jpg" alt="ML Director" class="officer-image">
+                    <p>ML Director</p>
+                    <p>[ML Director Name]</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="swe-director.png" alt="SWE Director" class="officer-image">
+                    <p>SWE Director</p>
+                    <p>Sam Levine</p>
+                </div>
+    
+                <div class="officer">
+                    <img src="qis-director.jpg" alt="QIS Director" class="officer-image">
+                    <p>QIS Director</p>
+                    <p>[QIS Director Name]</p>
+                </div>
+            </div>
+        </div>
+    
+        <div id="committees" class="content-section">
+            <header>
+                <h1>Active Committees</h1>
+            </header>
 
-            // Redirect to the main part of your website (e.g., index.html)
-            window.location.href = "index.html";
-        }
-    </script>
+            <section>
+                <h2>Machine Learning Committee</h2>
+                <pre>Current ML Director:</pre>
+                <pre>The ML Committee is devoted to providing students with any computer science experience the 
+opportunity to develop machine learning knowledge. Following an immersive Fall quarter ramp-up workshop, 
+members will work on publishing papers at ML conferences and workshops. Additionally, the ML Committee will 
+work on two quarter-long projects during the Winter and Spring quarters.</pre>
+            </section>
+
+            <section>
+                <h2>Quantum Information Science Committee</h2>
+                <pre>Current QIS Director:</pre>
+            </section>
+
+            <section>
+                <h2>Software Engineering Committee</h2>
+                <pre>Current SWE Director:</pre>
+                
+            </section>
+        </div>
+        <!-- <div id="sponsors" class="content-section">
+            <header>
+                <h1>Current Sponsors</h1>
+            </header>
+        </div> -->
+        <!-- <div id="newsletter" class="content-section">
+            <header>
+                <h1>Student Newsletter</h1>
+            </header>
+        </div> -->
+        <div id="events" class="content-section">
+            <header>
+                <h1>Upcoming events!</h1>
+            </header>
+
+            <section>
+                <h2>UChicago ACM Game Night</h2>
+                <pre>Friday, Janurary 5th, 2024 6:00 pm - 9:00 pm at the MADD Center (Room TBD).
+UChicago ACM is hosting a game night to start off the new quarter!</pre>
+            </section>
+
+            <section>
+                <h2>2024 Chicago Quantum Recruiting Forum</h2>
+                <pre>Friday, April 11th, 2024 12:00 pm - 4:00 pm at the John Crerar Library Building.</pre>
+                <a href="https://bit.ly/2024CQRF." target="_blank" rel="noopener noreferrer">Register through this link</a>
+            </section>
+
+
+        </div>
+        <div id="contact" class="content-section">
+            <div id="container">
+                <h1>&bull; GET IN TOUCH &bull;</h1>
+                <div class="contact-info">
+                    <p>Email: uchicagoacm@gmail.com</p>
+                    <p>Instagram: uchicagoacm</p>
+                </div>
+                <form action="send_email.php" method="post" id="contact_form">
+                  <div class="name">
+                    <label for="name"></label>
+                    <input type="text" placeholder="MY NAME IS" name="name" id="name_input" required>
+                  </div>
+                  <div class="email">
+                    <label for="email"></label>
+                    <input type="email" placeholder="MY EMAIL IS" name="email" id="email_input" required>
+                  </div>
+                  <div class="telephone">
+                    <label for="name"></label>
+                    <input type="text" placeholder="MY NUMBER IS" name="telephone" id="telephone_input" required>
+                  </div>
+                  <div class="subject">
+                    <label for="subject"></label>
+                    <select placeholder="SUBJECT LINE" name="subject" id="subject_input" required>
+                      <option disabled hidden selected>SUBJECT LINE</option>
+                      <option>I'd like to start a project</option>
+                      <option>I'd like to ask a question</option>
+                      <option>I'd like to be a sponsor</option>
+                    </select>
+                  </div>
+                  <div class="message">
+                    <label for="message"></label>
+                    <textarea name="message" placeholder="I'D LIKE TO TALK ABOUT..." id="message_input" cols="30" rows="5" required></textarea>
+                  </div>
+                  <div class="submit">
+                    <input type="submit" value="Send Message" id="form_button" />
+                  </div>
+                </form><!-- // End form -->
+              </div><!-- // End #container -->
+        </div>
 </body>
 </html>
+
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if the user has already seen the landing page
+            var hasSeenLandingPage = document.cookie.indexOf("landing_page_seen=true") !== -1;
+
+            // If the user has not seen the landing page, redirect to it
+            if (!hasSeenLandingPage) {
+                window.location.href = "landing.html";
+            }
+            // Get all the section links
+            var sectionLinks = document.querySelectorAll('.nav-link');
+
+            // Add a click event listener to each section link
+            sectionLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent the default behavior
+
+                    // Remove the 'active' class from all links
+                    sectionLinks.forEach(function (link) {
+                        link.classList.remove('active');
+                    });
+
+                    // Add the 'active' class to the clicked link
+                    link.classList.add('active');
+
+                    // Get the target section ID from the data-target attribute
+                    var targetId = link.getAttribute('data-target');
+
+                    // Hide all content sections
+                    document.querySelectorAll('.content-section').forEach(function (section) {
+                        section.classList.remove('active');
+                    });
+
+                    // Show the active content section
+                    document.getElementById(targetId).classList.add('active');
+
+                    // Set a cookie to indicate that the user has seen the landing page
+                    document.cookie = "landing_page_seen=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+                });
+            });
+        });
+
+</script>
