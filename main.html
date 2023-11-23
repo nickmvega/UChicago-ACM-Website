@@ -177,63 +177,74 @@
 
         /* Add a media query for smaller screens */
         @media only screen and (max-width: 600px) {
+            body {
+                width: 100%; /* Make the body full width */
+                overflow-x: hidden; /* Hide horizontal overflow */
+            }
+
             .vertical-navbar {
-                width: 100%; /* Make the navigation bar full width on small screens */
-                position: static; /* Remove fixed positioning */
-                height: auto; /* Allow the navigation bar to take up only as much space as needed */
-                flex-direction: column; /* Stack items vertically */
-                align-items: center; /* Center items horizontally */
+                width: 100%;
+                position: static;
+                height: auto;
+                flex-direction: row; /* Make the navigation bar horizontal */
+                justify-content: space-between; /* Add space between logo and links */
+                align-items: center;
+                padding: 10px; /* Add padding for better spacing */
             }
 
             .nav-logo {
-                width: 100%; /* Make the logo full width */
-                max-width: 200px; /* Set a maximum width for the logo */
-                margin-bottom: 10px; /* Add margin below the logo */
+                width: 150px; /* Adjust the logo width */
+                max-width: 100%; /* Make the logo responsive */
             }
 
             .nav-header {
-                margin-bottom: 20px; /* Increase the margin for better spacing */
+                margin-bottom: 10px; /* Adjust margin for better spacing */
             }
 
             .nav-link {
-                margin-top: 10px; /* Adjust the margin-top for better spacing */
-                font-size: 16px; /* Adjust the font size for smaller screens */
+                margin-top: 0; /* Remove top margin */
+                margin-left: 10px; /* Add left margin for spacing between links */
+                font-size: 14px; /* Adjust font size for smaller screens */
             }
 
             #content-container {
-                margin-top: 10px; /* Adjust the margin-top for better spacing */
-                margin-left: 0; /* Remove the margin-left for full width */
-                width: 100%; /* Make the content container full width */
+                margin-top: 10px;
+                margin-left: 10px; /* Add margin for better spacing */
+                width: calc(100% - 20px); /* Adjust the width to fill the remaining space with margin */
             }
 
             .content-section {
-                padding: 10px; /* Adjust padding for better spacing */
+                padding: 10px;
             }
 
             .officer img {
-                width: 100%; /* Make the image full width */
-                height: auto; /* Maintain the aspect ratio */
-                border-radius: 15%; /* Adjust border radius */
+                width: 100%;
+                height: auto;
+                border-radius: 15%;
             }
 
             .level-0,
             .level-1,
             .level-2 {
-                margin: 10px; /* Adjust margin for better spacing */
-                display: block; /* Stack levels vertically */
+                margin: 10px;
+                display: block;
             }
 
             section h2 {
-                font-size: 18px; /* Adjust the font size for smaller screens */
+                font-size: 16px; /* Adjust font size for smaller screens */
             }
 
             .social-icons {
-                flex-direction: column; /* Stack social icons vertically */
+                flex-direction: column;
                 align-items: center;
             }
 
             .social-icon {
-                margin-top: 10px; /* Adjust margin for better spacing */
+                margin-top: 10px;
+            }
+
+            header {
+                margin-top: 10px; /* Add margin to separate header from navigation bar */
             }
         }
 
