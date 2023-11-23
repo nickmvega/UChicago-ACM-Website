@@ -123,8 +123,12 @@
             margin-top: 0px;
         }
 
-        .officer {
+        .level-0 .officer,
+        .level-1 .officer,
+        .level-2 .officer {
             text-align: center;
+            margin-top: 30px; /* Adjust top margin to lower the position */
+            margin-bottom: 20px; /* Adjust bottom margin if necessary */
         }
 
         .officer img {
@@ -132,6 +136,7 @@
             height: 150px;
             border-radius: 30%;
         }
+
         .officer-image {
             /* Visually hide the text in the image */
             font-size: 0;
@@ -142,11 +147,11 @@
         .level-1,
         .level-2 {
             display: flex;
-            justify-content: center; /* Align officers in the center */
+            justify-content: center;
             margin: 20px;
         }
 
-        .level-0 .officer,
+        .officer,
         .level-1 .officer,
         .level-2 .officer {
             margin: 0 20px; /* Adjust spacing between officers */
