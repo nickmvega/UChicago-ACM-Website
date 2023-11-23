@@ -178,39 +178,44 @@
         /* Add a media query for smaller screens */
         @media only screen and (max-width: 600px) {
             body {
-                width: 100%; /* Make the body full width */
-                overflow-x: hidden; /* Hide horizontal overflow */
+                width: 100%;
+                overflow-x: hidden;
             }
 
             .vertical-navbar {
-                width: 100%;
+                width: 100vw; /* Set the width to the full viewport width */
                 position: static;
                 height: auto;
-                flex-direction: row; /* Make the navigation bar horizontal */
-                justify-content: space-between; /* Add space between logo and links */
+                display: flex;
+                justify-content: space-between;
                 align-items: center;
-                padding: 10px; /* Add padding for better spacing */
+                padding: 10px;
+                flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
             }
 
             .nav-logo {
-                width: 150px; /* Adjust the logo width */
-                max-width: 100%; /* Make the logo responsive */
+                width: 150px;
+                max-width: 100%;
             }
 
             .nav-header {
-                margin-bottom: 10px; /* Adjust margin for better spacing */
+                margin-bottom: 10px;
+            }
+
+            .nav-header h2 {
+                font-size: 14px; /* Adjust font size for the header */
             }
 
             .nav-link {
-                margin-top: 0; /* Remove top margin */
-                margin-left: 10px; /* Add left margin for spacing between links */
-                font-size: 14px; /* Adjust font size for smaller screens */
+                margin-top: 0;
+                margin-left: 10px;
+                font-size: 14px;
             }
 
             #content-container {
                 margin-top: 10px;
-                margin-left: 10px; /* Add margin for better spacing */
-                width: calc(100% - 20px); /* Adjust the width to fill the remaining space with margin */
+                margin-left: 10px;
+                width: calc(100% - 20px);
             }
 
             .content-section {
@@ -231,7 +236,7 @@
             }
 
             section h2 {
-                font-size: 16px; /* Adjust font size for smaller screens */
+                font-size: 16px;
             }
 
             .social-icons {
@@ -244,7 +249,13 @@
             }
 
             header {
-                margin-top: 10px; /* Add margin to separate header from navigation bar */
+                margin-top: 10px;
+            }
+
+            /* Set the maximum zoom out to match body width */
+            @viewport {
+                width: device-width;
+                zoom: 1.0;
             }
         }
 
