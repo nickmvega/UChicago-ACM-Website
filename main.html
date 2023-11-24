@@ -183,45 +183,42 @@
             }
 
             .vertical-navbar {
-                width: 100vw; /* Set the width to the full viewport width */
-                position: static;
-                height: auto;
+                width: 100vw;
                 display: flex;
-                flex-direction: row; /* Set to row for horizontal alignment */
-                justify-content: space-between;
+                flex-direction: column;
                 align-items: center;
                 padding: 10px;
-                flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
             }
 
             .nav-logo {
-                width: 150px;
-                max-width: 100%;
-            }
-
-            .nav-header {
-                margin-bottom: 10px;
+                width: 100%;
+                max-width: 150px;
             }
 
             .nav-header h2 {
-                font-size: 14px; /* Adjust font size for the header */
-                margin: 0; /* Remove margin for the header */
-            }
-
-            .nav-link {
-                margin-top: 0;
                 font-size: 14px;
-                margin-left: 10px;
+                margin: 0;
+                margin-bottom: 10px;
             }
 
-                        /* Increase the width of the navigation bar to accommodate all links */
             .nav-link {
-                flex: 1; /* Distribute the available space equally among the links */
+                font-size: 14px;
+                margin-top: 10px;
+            }
+
+            /* Display links horizontally */
+            .nav-links-container {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                margin-left: 10px;
             }
 
             #content-container {
-                margin-top: 10px;
-                margin-left: 10px;
+                margin: 10px;
                 width: calc(100% - 20px);
             }
 
@@ -265,6 +262,7 @@
                 zoom: 1.0;
             }
         }
+
 
 
     </style>
