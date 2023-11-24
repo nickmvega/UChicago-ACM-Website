@@ -178,42 +178,40 @@
         /* Add a media query for smaller screens */
         @media only screen and (max-width: 600px) {
             body {
+                margin: 0;
+                padding: 0;
                 width: 100%;
                 overflow-x: hidden;
             }
 
             .vertical-navbar {
-                width: 100vw;
+                width: 100%;
                 display: flex;
-                flex-direction: column;
+                flex-direction: row; /* Change to row for horizontal alignment */
+                justify-content: space-between;
                 align-items: center;
                 padding: 10px;
             }
 
             .nav-logo {
-                width: 100%;
-                max-width: 150px;
+                width: 100px; /* Adjust the width to make it smaller */
+                max-width: 100%;
             }
 
             .nav-header h2 {
                 font-size: 14px;
                 margin: 0;
-                margin-bottom: 10px;
+                margin-left: 10px; /* Add some margin between logo and header */
             }
 
-            .nav-link {
-                font-size: 14px;
-                margin-top: 10px;
-            }
-
-            /* Display links horizontally */
             .nav-links-container {
                 display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
+                justify-content: flex-end; /* Align links to the right */
+                align-items: center;
             }
 
             .nav-link {
+                font-size: 12px; /* Adjust the font size to make it smaller */
                 margin-left: 10px;
             }
 
@@ -224,6 +222,8 @@
 
             .content-section {
                 padding: 10px;
+                max-width: 100%;
+                box-sizing: border-box;
             }
 
             .officer img {
@@ -262,7 +262,6 @@
                 zoom: 1.0;
             }
         }
-
 
 
     </style>
