@@ -171,10 +171,33 @@
             text-align: center;
             margin-top: 30px;
         }
+
+        .mobile-menu-icon {
+            display: none;
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
         
 
         /* Add a media query for smaller screens */
         @media only screen and (max-width: 600px) {
+            .mobile-menu-icon {
+                display: block;
+            }
+
+            .vertical-navbar.show-mobile-menu {
+                transform: translateX(0);
+            }
+
+            .vertical-navbar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+
             body {
                 margin: 0;
                 padding: 0;
@@ -289,7 +312,11 @@
         <!-- <a href="#sponsors" id="sponsors-link" class="nav-link" data-target="sponsors">sponsors</a> -->
         <!-- <a href="#newsletter" id="newsletter-link" class="nav-link" data-target="newsletter">newsletter</a> -->
         <a href="#events" id="events-link" class="nav-link" data-target="events">events</a>
-        <a href="#contact" id="contact-link" class="nav-link" data-target="contact">contact</a>        
+        <a href="#contact" id="contact-link" class="nav-link" data-target="contact">contact</a>  
+        
+        <div class="mobile-menu-icon">
+            <i class="fas fa-bars"></i>
+        </div>
     </nav>
 
     <!-- Content sections -->
@@ -539,6 +566,12 @@ Current Marketing Co-Director:</pre>
                     // Set a cookie to indicate that the user has seen the landing page
                     document.cookie = "landing_page_seen=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
                 });
+            });
+
+            var mobileMenuIcon = document.querySelector('.mobile-menu-icon');
+            mobileMenuIcon.addEventListener('click', function () {
+                var navbar = document.querySelector('.vertical-navbar');
+                navbar.classList.toggle('show-mobile-menu');
             });
         });
 
