@@ -125,36 +125,34 @@
 
         .level-0 .officer,
         .level-1 .officer,
-        .level-2 .officer {
+        .level-2 .officer,
+        .level-3 .officer {
             text-align: center;
-            margin-top: 30px; /* Adjust top margin to lower the position */
-            margin-bottom: 20px; /* Adjust bottom margin if necessary */
+            margin-top: 15px; /* Adjust top margin to lower the position */
+            margin-bottom: 10px; /* Adjust bottom margin if necessary */
+            margin-top: 36px; 
         }
 
         .officer img {
-            width: 150px;
-            height: 150px;
-            border-radius: 30%;
-        }
-
-        .officer-image {
-            /* Visually hide the text in the image */
-            font-size: 0;
-            color: transparent;
+            width: 120px; /* Adjust the width to make it smaller */
+            height: 120px; /* Adjust the height to make it smaller */
+            border-radius: 20%; /* Adjust border-radius for rounded corners */
         }
 
         .level-0,
         .level-1,
-        .level-2 {
+        .level-2,
+        .level-3 {
             display: flex;
             justify-content: center;
-            margin: 20px;
+            margin: 10px; /* Adjust margin for spacing between levels */
         }
 
         .officer,
         .level-1 .officer,
-        .level-2 .officer {
-            margin: 0 20px; /* Adjust spacing between officers */
+        .level-2 .officer, 
+        .level-3 .officer {
+            margin: 0 10px; /* Adjust spacing between officers */
         }
 
 
@@ -230,35 +228,6 @@
                 box-sizing: border-box;
             }
 
-            .level-0 .officer,
-            .level-1 .officer,
-            .level-2 .officer {
-                text-align: center;
-                margin-top: 15px; /* Adjust top margin to lower the position */
-                margin-bottom: 10px; /* Adjust bottom margin if necessary */
-                margin-top: 36px; 
-            }
-
-            .officer img {
-                width: 100px; /* Adjust the width to make it smaller */
-                height: 100px; /* Adjust the height to make it smaller */
-                border-radius: 20%; /* Adjust border-radius for rounded corners */
-            }
-
-            .level-0,
-            .level-1,
-            .level-2 {
-                display: flex;
-                justify-content: center;
-                margin: 10px; /* Adjust margin for spacing between levels */
-            }
-
-            .officer,
-            .level-1 .officer,
-            .level-2 .officer {
-                margin: 0 10px; /* Adjust spacing between officers */
-            }
-
 
             section {
                 font-size: 10px;
@@ -328,30 +297,38 @@
                 <!-- Mission Statement section -->
                 <section class="mission-statement">
                     <h2>Mission Statement</h2>
-                    <pre>UChicago ACM strives to foster communication and collaboration within the University's computer science 
-community and other technical communities, supporting members' professional growth through opportunities 
-for lifelong learning, career development, and professional networking. We plan on organizing various events, 
-including round-table discussions, guest lectures, gaming nights, and our unique ‘innovate evenings’.</pre>
+                    UChicago ACM strives to foster communication and collaboration within the University's computer science community and other technical communities, supporting members' professional growth through opportunities for lifelong learning, career development, and professional networking. 
                 </section>
 
                 <section class="join">
                     <h2>Why you should join</h2>
-                    <pre>Join UChicago ACM and become a part of a vibrant community dedicated to fostering communication and 
-collaboration within the University's computer science community and other technical fields. 
-Our inclusive environment welcomes everyone, regardless of coding experience.
-                                                
-As a member, you'll benefit from:
-                                                
-- Opportunities for Lifelong Learning: Gain valuable insights and expand your knowledge through engaging 
-  activities.
-- Career Development: Avail yourself of resources to support your professional growth and career 
-  aspirations.
-- Professional Networking: Connect with like-minded individuals and industry professionals.
-- Diverse Events: Participate in various events, from round-table discussions to guest lectures, gaming 
-  nights, and our unique ‘innovate evenings.’
-                                                
-Join us in building a community where passion for technology meets inclusivity and learning. No coding 
-experience required – just a desire to explore, connect, and have fun!</pre>
+                    <pre>
+Joining UChicago ACM opens up a world of opportunities for students passionate about computer science. 
+Our organization boasts four dynamic committees spanning diverse industries, including machine learning, 
+software engineering, marketing, and financial advising. The machine learning and software engineering 
+committees, in particular, welcome students of all levels, fostering an environment where everyone can learn 
+and not feel left behind. We plan on expanding into more industries based on demand and interests within 
+the club.
+
+What sets UChicago ACM apart is our commitment to weekly meetings that delve into a spectrum of computer science 
+topics. Each week, we gather to discuss advancements in industry trends, and trending tech news, and share 
+insights that contribute to the collective growth of our members. These meetings serve as a platform for 
+learning, collaboration, and the exchange of ideas. 
+
+Furthermore, our committees actively engage in hands-on projects, allowing members to apply their knowledge 
+in real-world scenarios. From developing innovative software solutions to exploring the depths of machine 
+learning applications, our teams work collaboratively to push the boundaries of their respective fields.  
+
+UChicago ACM is not just a club; it's a community. We understand the importance of networking and collaboration, 
+which is why we organize multiple events throughout the quarters with other organizations and company sponsors. 
+Building these connections with students and professionals not only enriches your academic experience but also 
+opens doors to potential collaborations and future endeavors. 
+
+If you're seeking a vibrant community where your passion for computer science can flourish, 
+UChicago ACM is the place for you. Join us as we explore the limitless possibilities within the world of 
+technology, one weekly meeting and collaborative project at a time. Fill out the form linked below to start your 
+journey of knowledge, innovation, and camaraderie. We look forward to welcoming you into the exciting world of 
+UChicago ACM!</pre>
                 </section>
 
                 <section class="interested">
@@ -368,59 +345,78 @@ experience required – just a desire to explore, connect, and have fun!</pre>
             <!-- Officers content goes here -->
             <div class="level-0">
                 <div class="officer">
-                    <img src="president1.png" alt="Co-President 1 class="officer-image">
+                    <img src="president1.png" alt="Co-President 1" class="officer-image">
                     <p>Co-President</p>
                     <p>Nicholas Vega</p>
                 </div>
-    
+            
                 <div class="officer">
                     <img src="president2.png" alt="Co-President 2" class="officer-image">
                     <p>Co-President</p>
                     <p>Charlie Carvajal</p>
                 </div>
             </div>
-    
+            
             <div class="level-1">
-                <div class="officer">
-                    <img src="treasurer.png" alt="Treasurer" class="officer-image">
-                    <p>Treasurer</p>
-                    <p>Carlos Carvajal</p>
-                </div>
-    
                 <div class="officer">
                     <img src="secretary.jpg" alt="Secretary" class="officer-image">
                     <p>Secretary</p>
-                    <p>[Secretary Name]</p>
+                    <p>Natalyah Cadiche</p>
                 </div>
-    
+            
                 <div class="officer">
-                    <img src="social-chair.jpg" alt="Social Chair" class="officer-image">
-                    <p>Social Chair</p>
-                    <p>[Social Chair Name]</p>
+                    <img src="event-director.jpg" alt="Event Director" class="officer-image">
+                    <p>Event Coordinator</p>
+                    <p>[Name]</p>
                 </div>
             </div>
-    
+            
             <div class="level-2">
                 <div class="officer">
-                    <img src="ml-director.jpg" alt="ML Director" class="officer-image">
-                    <p>ML Director</p>
-                    <p>[ML Director Name]</p>
+                    <img src="treasurer1.png" alt="Financial Co-Director 1" class="officer-image">
+                    <p>Financial Director</p>
+                    <p>Carlos Carvajal</p>
                 </div>
-    
+            
                 <div class="officer">
-                    <img src="swe-director.png" alt="SWE Director" class="officer-image">
-                    <p>SWE Director</p>
+                    <img src="social-chair1.jpg" alt="Marketing Co-Director 1" class="officer-image">
+                    <p>Marketing Co-Director</p>
+                    <p>[Marketing Co-Director 1 Name]</p>
+                </div>
+            
+                <div class="officer">
+                    <img src="social-chair2.jpg" alt="Marketing Co-Director 2" class="officer-image">
+                    <p>Marketing Co-Director</p>
+                    <p>[Marketing Co-Director 2 Name]</p>
+                </div>
+            </div>
+            
+            <div class="level-3">
+                <div class="officer">
+                    <img src="ml-director1.png" alt="ML Co-Director 1" class="officer-image">
+                    <p>ML Committee Co-Director</p>
+                    <p>Shubhaankar Gupta</p>
+                </div>
+            
+                <div class="officer">
+                    <img src="ml-director2.jpg" alt="ML Co-Director 2" class="officer-image">
+                    <p>ML Committee Co-Director</p>
+                    <p>[Name]</p>
+                </div>
+            
+                <div class="officer">
+                    <img src="swe-director1.png" alt="SWE Co-Director 1" class="officer-image">
+                    <p>SWE Committee Co-Director</p>
                     <p>Sam Levine</p>
                 </div>
-    
+            
                 <div class="officer">
-                    <img src="qis-director.jpg" alt="QIS Director" class="officer-image">
-                    <p>QIS Director</p>
-                    <p>[QIS Director Name]</p>
+                    <img src="swe-director2.png" alt="SWE Co-Director 2" class="officer-image">
+                    <p>SWE Committee Co-Director</p>
+                    <p>[Name]</p>
                 </div>
             </div>
         </div>
-    
         <div id="committees" class="content-section">
             <header>
                 <h1>Active Committees</h1>
@@ -428,34 +424,33 @@ experience required – just a desire to explore, connect, and have fun!</pre>
 
             <section>
                 <h2>Machine Learning Committee</h2>
-                <pre>Current ML Director:</pre>
-                <pre>The ML Committee is devoted to providing students with any computer science experience the 
+                <pre>Current ML Committee Co-Director: Shubhaankar Gupta
+Current ML Committee Co-Director:</pre>
+                The ML Committee is devoted to providing students with any computer science experience the 
 opportunity to develop machine learning knowledge. Following an immersive Fall quarter ramp-up workshop, 
 members will work on publishing papers at ML conferences and workshops. Additionally, the ML Committee will 
-work on two quarter-long projects during the Winter and Spring quarters.</pre>
-            </section>
-
-            <section>
-                <h2>Quantum Information Science Committee</h2>
-                <pre>Current QIS Director:</pre>
+work on two quarter-long projects during the Winter and Spring quarters.
             </section>
 
             <section>
                 <h2>Software Engineering Committee</h2>
-                <pre>Current SWE Director: Sam Levine</pre>
-                
+                <pre>Current SWE Committee Co-Director: Sam Levine
+Current SWE Committee Co-Director: </pre>
+                The SWE Committee prioritizes cultivating essential technical and practical skills for professional development in the field. Activities include interview preparation with a focus on algorithms and data structures, lessons on GitHub and version control, exposure to Agile Development, LeetCode problem-solving, a Basic React Course, Python for Programming Interviews, and exploration of tools such as Pydantic, Python libraries, and Pytest for unit tests. The committee engages in hands-on learning through side projects and collaborates on quarterly group projects, reinforcing skills through practical application during meetings.</pre>
+            </section>
+
+            <section>
+                <h2>Marketing Team</h2>
+                <pre>Current Marketing Co-Director: 
+Current Marketing Co-Director:</pre>
+                The marketing team is led by two Marketing Co-Directors. These individuals play a pivotal role in orchestrating and overseeing the team's efforts across various domains, including advertising, social media management, outreach initiatives, and other essential aspects of our marketing strategy. Tasked with the responsibility of shaping the organization's public image and promoting its initiatives, the Marketing Co-Directors employ their strategic vision to coordinate campaigns, engage with diverse audiences, and ensure a cohesive and impactful presence across multiple platforms. The Marketing team is selective and will have an application process for anyone who is interested in joining. 
+            </section>
+
+            <section>
+                <h2>Financial Advising Team</h2>
+                <pre>Current Financial Director: Carlos Carvajal</pre>
             </section>
         </div>
-        <!-- <div id="sponsors" class="content-section">
-            <header>
-                <h1>Current Sponsors</h1>
-            </header>
-        </div> -->
-        <!-- <div id="newsletter" class="content-section">
-            <header>
-                <h1>Student Newsletter</h1>
-            </header>
-        </div> -->
         <div id="events" class="content-section">
             <header>
                 <h1>Upcoming events!</h1>
