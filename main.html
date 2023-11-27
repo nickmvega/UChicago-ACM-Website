@@ -187,129 +187,137 @@
         }
 
         @media only screen and (max-width: 600px) {
-        .nav-links-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px; /* Adjust margin as needed */
+            .nav-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .nav-logo {
+                width: 80px;
+                max-width: 100%;
+            }
+
+            .nav-header h2 {
+                font-size: 14px;
+                margin: 0;
+            }
+
+            .nav-links-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 20px; /* Adjust margin as needed */
+            }
+
+            .nav-links-container a {
+                margin-bottom: 10px;
+                font-size: 14px; /* Adjust font size as needed */
+            }
+
+            .mobile-menu-icon {
+                display: block;
+                color: white; /* Add text color for the hamburger icon */
+            }
+
+            .vertical-navbar.show-mobile-menu {
+                transform: translateX(0);
+            }
+
+            .vertical-navbar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                background-color: maroon; /* Add background color for the mobile menu */
+                position: fixed;
+                top: 0;
+                right: 0; /* Position the mobile menu on the top right */
+                width: 70%; /* Set the width of the mobile menu */
+                max-width: 300px; /* Set a max-width for the mobile menu */
+                z-index: 2;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for a nice effect */
+            }
+
+            .nav-links-container {
+                justify-content: center;
+                width: 100%; /* Make the mobile menu links full-width */
+                padding: 20px; /* Add padding for better spacing */
+                box-sizing: border-box;
+            }
+
+            .nav-link {
+                font-size: 14px;
+                height: auto;
+                text-align: center; /* Center the text in mobile view */
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .officer-image {
+                width: 50px; /* Adjust the size as needed */
+                height: 50px;
+            }
+
+            #content-container {
+                margin: 12vh 15px 15px 6px; 
+                width: calc(100% - 20px);
+            }
+
+            .content-section {
+                padding: 0px;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            section {
+                font-size: 14px;
+            }
+
+            section h2 {
+                font-size: 18px;
+            }
+
+            .social-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-icon {
+                margin-top: 10px;
+            }
+
+            header {
+                margin-top: 4vh; /* Adjust margin for the new header */
+                margin-left: 4px; /* Move the header to the left */
+                text-align: center;
+            }
+
+            header h1 {
+                margin: 0;
+                font-size: 20px; /* Adjust the font size of the header */
+            }   
+
+            .level-0 .officer p,
+            .level-1 .officer p,
+            .level-2 .officer p,
+            .level-3 .officer p {
+                font-size: 14px; /* Adjust the font size as needed */
+            }
+
+            /* Set the maximum zoom out to match body width */
+            @viewport {
+                width: device-width;
+                zoom: 1.0;
+            }
         }
 
-        .nav-links-container a {
-            margin-bottom: 10px;
-            font-size: 14px; /* Adjust font size as needed */
-        }
-
-        .mobile-menu-icon {
-            display: block;
-        }
-
-        .vertical-navbar.show-mobile-menu {
-            transform: translateX(0);
-        }
-
-        .vertical-navbar {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
-        }
-
-        .officer-image {
-            width: 50px; /* Adjust the size as needed */
-            height: 50px;
-        }
-
-        .vertical-navbar {
-            width: 100%;
-            height: 10vh;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly; /* or space-around */
-            align-items: center;
-            padding: 0px;
-        }
-
-        .nav-logo {
-            width: 80px;
-            max-width: 100%;
-            margin-left: 0px;
-        }
-
-        .nav-header h2 {
-            font-size: 8px;
-            margin: 0;
-            margin-left: 0px;
-        }
-
-        .nav-links-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .nav-link {
-            font-size: 14px;
-            height: 6vh;
-        }
-
-        #content-container {
-            margin: 12vh 15px 15px 6px; 
-            width: calc(100% - 20px);
-        }
-
-        .content-section {
-            padding: 0px;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        section {
-            font-size: 10px;
-        }
-
-        section h2 {
-            font-size: 14px;
-        }
-
-        .social-icons {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .social-icon {
-            margin-top: 10px;
-        }
-
-        header {
-            margin-top: 4vh; /* Adjust margin for the new header */
-            margin-left: 4px; /* Move the header to the left */
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 16px; /* Adjust the font size of the header */
-        }   
-
-        .level-0 .officer p,
-        .level-1 .officer p,
-        .level-2 .officer p,
-        .level-3 .officer p {
-            font-size: 12px; /* Adjust the font size as needed */
-        }
-
-        /* Set the maximum zoom out to match body width */
-        @viewport {
-            width: device-width;
-            zoom: 1.0;
-        }
-    }
 
 
 
