@@ -171,6 +171,7 @@
             text-align: center;
             margin-top: 30px;
         }
+        
 
         /* Add a media query for smaller screens */
         @media only screen and (max-width: 600px) {
@@ -183,7 +184,14 @@
 
             .officer-image {
                 width: 50px; /* Adjust the size as needed */
-                height: 50px;
+                height: auto;
+            }
+
+            .level-0 .officer p,
+            .level-1 .officer p,
+            .level-2 .officer p,
+            .level-3 .officer p {
+                font-size: 12px; /* Adjust the font size as needed */
             }
 
             .vertical-navbar {
@@ -261,13 +269,6 @@
                 font-size: 16px; /* Adjust the font size of the header */
             }   
 
-            .level-0 .officer p,
-            .level-1 .officer p,
-            .level-2 .officer p,
-            .level-3 .officer p {
-                font-size: 12px; /* Adjust the font size as needed */
-            }
-
             /* Set the maximum zoom out to match body width */
             @viewport {
                 width: device-width;
@@ -295,8 +296,7 @@
         <!-- <a href="#sponsors" id="sponsors-link" class="nav-link" data-target="sponsors">sponsors</a> -->
         <!-- <a href="#newsletter" id="newsletter-link" class="nav-link" data-target="newsletter">newsletter</a> -->
         <a href="#events" id="events-link" class="nav-link" data-target="events">events</a>
-        <a href="#contact" id="contact-link" class="nav-link" data-target="contact">contact</a>  
-
+        <a href="#contact" id="contact-link" class="nav-link" data-target="contact">contact</a>        
     </nav>
 
     <!-- Content sections -->
@@ -546,12 +546,6 @@ Current Marketing Co-Director:</pre>
                     // Set a cookie to indicate that the user has seen the landing page
                     document.cookie = "landing_page_seen=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
                 });
-            });
-
-            var mobileMenuIcon = document.querySelector('.mobile-menu-icon');
-            mobileMenuIcon.addEventListener('click', function () {
-                var navbar = document.querySelector('.vertical-navbar');
-                navbar.classList.toggle('show-mobile-menu');
             });
         });
 
