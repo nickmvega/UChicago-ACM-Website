@@ -181,116 +181,135 @@
             top: 20px;
             right: 20px;
         }
-        
 
-        /* Add a media query for smaller screens */
-        @media only screen and (max-width: 600px) {
-            .mobile-menu-icon {
-                display: block;
-            }
-
-            .vertical-navbar.show-mobile-menu {
-                transform: translateX(0);
-            }
-
-            .vertical-navbar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                overflow-x: hidden;
-            }
-
-            .officer-image {
-                width: 50px; /* Adjust the size as needed */
-                height: 50px;
-            }
-
-            .vertical-navbar {
-                width: 100%;
-                height: 10vh;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly; /* or space-around */
-                align-items: center;
-                padding: 0px;
-            }
-
-            .nav-logo {
-                width: 80px;
-                max-width: 100%;
-                margin-left: 0px;
-            }
-
-            .nav-header h2 {
-                font-size: 8px;
-                margin: 0;
-                margin-left: 0px;
-            }
-
-            .nav-links-container {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                margin-bottom: 10px;
-            }
-
-            .nav-link {
-                font-size: 9px;
-                height: 6vh;
-            }
-
-
-            #content-container {
-                margin: 12vh 15px 15px 6px; 
-                width: calc(100% - 20px);
-            }
-
-            .content-section {
-                padding: 0px;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-
-
-            section {
-                font-size: 10px;
-            }
-
-            section h2 {
-                font-size: 14px;
-            }
-
-            .social-icons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .social-icon {
-                margin-top: 10px;
-            }
-
-            header {
-                margin-top: 4vh; /* Adjust margin for the new header */
-                margin-left: 4px; /* Move the header to the left */
-                text-align: center;
-            }
-
-            header h1 {
-                margin: 0;
-                font-size: 16px; /* Adjust the font size of the header */
-            }   
-
-            /* Set the maximum zoom out to match body width */
-            @viewport {
-                width: device-width;
-                zoom: 1.0;
-            }
+        .nav-links-container {
+            display: none; /* Hide the links by default on mobile */
         }
+
+        @media only screen and (max-width: 600px) {
+        .nav-links-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+
+        .nav-links-container a {
+            margin-bottom: 10px;
+            font-size: 14px; /* Adjust font size as needed */
+        }
+
+        .mobile-menu-icon {
+            display: block;
+        }
+
+        .vertical-navbar.show-mobile-menu {
+            transform: translateX(0);
+        }
+
+        .vertical-navbar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .officer-image {
+            width: 50px; /* Adjust the size as needed */
+            height: 50px;
+        }
+
+        .vertical-navbar {
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly; /* or space-around */
+            align-items: center;
+            padding: 0px;
+        }
+
+        .nav-logo {
+            width: 80px;
+            max-width: 100%;
+            margin-left: 0px;
+        }
+
+        .nav-header h2 {
+            font-size: 8px;
+            margin: 0;
+            margin-left: 0px;
+        }
+
+        .nav-links-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            height: 6vh;
+        }
+
+        #content-container {
+            margin: 12vh 15px 15px 6px; 
+            width: calc(100% - 20px);
+        }
+
+        .content-section {
+            padding: 0px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        section {
+            font-size: 10px;
+        }
+
+        section h2 {
+            font-size: 14px;
+        }
+
+        .social-icons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-icon {
+            margin-top: 10px;
+        }
+
+        header {
+            margin-top: 4vh; /* Adjust margin for the new header */
+            margin-left: 4px; /* Move the header to the left */
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 16px; /* Adjust the font size of the header */
+        }   
+
+        .level-0 .officer p,
+        .level-1 .officer p,
+        .level-2 .officer p,
+        .level-3 .officer p {
+            font-size: 12px; /* Adjust the font size as needed */
+        }
+
+        /* Set the maximum zoom out to match body width */
+        @viewport {
+            width: device-width;
+            zoom: 1.0;
+        }
+    }
 
 
 
@@ -305,6 +324,10 @@
             <h2>Association for Computer Machinery</h2>
         </div>
 
+        <div class="mobile-menu-icon">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <!-- Navigation links -->
         <a href="#home" id="home-link" class="nav-link active" data-target="home">home</a>
         <a href="#officers" id="officers-link" class="nav-link" data-target="officers">officers</a>
@@ -314,9 +337,6 @@
         <a href="#events" id="events-link" class="nav-link" data-target="events">events</a>
         <a href="#contact" id="contact-link" class="nav-link" data-target="contact">contact</a>  
         
-        <div class="mobile-menu-icon">
-            <i class="fas fa-bars"></i>
-        </div>
     </nav>
 
     <!-- Content sections -->
